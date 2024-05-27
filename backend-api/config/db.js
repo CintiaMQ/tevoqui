@@ -1,21 +1,25 @@
-const { MongoClient } = require('mongodb');
+const mongoose = require('mongoose');
 
-// Función para conectar a MongoDB
-async function conectarMongoDB() {
+const conectarMongoDB = async () => {
   try {
-    const url = 'mongodb://localhost:27017'; // URL de tu instancia de MongoDB
-    const dbName = 'miBasedeDatos'; // Nombre de tu base de datos
+    const mongoURI = process.env.MONGO_URI;
 
-    const client = await MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
-    const db = client.db(dbName);
-    
-    console.log('Conexión exitosa a MongoDB');
-    
-    return db;
+    if (!mongoURI) {
+      console.error('No MongoDB URI specified in .env file');
+      process.exit(1);
+    }
+
+    const conn = await mongoose.connect(mongoURI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 30000, // Aumenta el tiempo de espera a 30 segundos
+    });
+
+    console.log(`MongoDB connected: ${conn.connection.host}`);
   } catch (error) {
     console.error('Error al conectar a MongoDB:', error);
     throw error;
   }
-}
+};
 
 module.exports = conectarMongoDB;

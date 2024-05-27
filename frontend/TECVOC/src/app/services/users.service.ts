@@ -13,7 +13,7 @@ export class UsersService {
   constructor(private http: HttpClient) { }
   private userName: string = 'John Doe'; 
   login(email: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, { email, password });
+    return this.http.post(`${this.apiUrl}/users/login`, { email, password });
   }
 
   isAuthenticated(): boolean {

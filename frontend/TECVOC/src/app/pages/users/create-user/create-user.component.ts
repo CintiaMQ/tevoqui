@@ -36,7 +36,7 @@ export class CreateUserComponent {
       payload.acceptTerms = this.acceptTerms;
     }
 
-    this.http.post('http://localhost:5000/api/register', payload)
+    this.http.post('http://localhost:5000/api/users/register', payload)
       .subscribe((response: any) => {
         console.log('User registered successfully:', response);
         localStorage.setItem('token', response.token);

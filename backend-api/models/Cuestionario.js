@@ -1,37 +1,32 @@
 const mongoose = require('mongoose');
-const { Schema } = mongoose;
 
-// Esquema para las opciones de las preguntas
-const OpcionSchema = new Schema({
-  texto: { type: String, required: true },
-  valor: { type: String, required: true }
+const preguntaSchema = new mongoose.Schema({
+  id: Number,
+  texto: String,
+  opciones: [
+    {
+      texto: String,
+      valor: String,
+    },
+  ],
 });
 
-// Esquema para las preguntas
-const PreguntaSchema = new Schema({
-  id: { type: Number, required: true },
-  texto: { type: String, required: true },
-  opciones: { type: [OpcionSchema], required: true }
+const carreraSchema = new mongoose.Schema({
+  nombre: String,
+  criterios: [
+    {
+      pregunta: Number,
+      respuesta: String,
+      puntaje: Number,
+    },
+  ],
 });
 
-// Esquema para los criterios de las carreras
-const CriterioSchema = new Schema({
-  pregunta: { type: Number, required: true },
-  respuesta: { type: String, required: true },
-  puntaje: { type: Number, required: true }
-});
+const cuestionarioSchema = new mongoose.Schema({
+  Preguntas: [preguntaSchema],
+  Carreras: [carreraSchema],
+}, { collection: 'cuestionario' }); // Especifica el nombre de la colección
 
-// Esquema para las carreras
-const CarreraSchema = new Schema({
-  nombre: { type: String, required: true },
-  criterios: { type: [CriterioSchema], required: true }
-});
+const Cuestionario = mongoose.model('Cuestionario', cuestionarioSchema);
 
-// Esquema principal para el cuestionario
-const CuestionarioSchema = new Schema({
-  Preguntas: { type: [PreguntaSchema], required: true },
-  Carreras: { type: [CarreraSchema], required: true }
-});
-
-// Especificar el nombre de la colección como 'cuestionario'
-module.exports = mongoose.model('Cuestionario', CuestionarioSchema, 'cuestionario');
+module.exports = Cuestionario;

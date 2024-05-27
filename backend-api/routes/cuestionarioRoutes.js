@@ -1,10 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const cuestionarioController = require('../controllers/cuestionarioController');
+const { listarCuestionarios } = require('../controllers/cuestionarioController');
 
-// Ruta para listar todos los cuestionarios
-router.get('/', cuestionarioController.listarCuestionarios);
-
-
+router.get('/', listarCuestionarios);
 
 module.exports = router;
