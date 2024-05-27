@@ -1,0 +1,40 @@
+<ng-container *ngIf="isSidebarVisible">
+    <div [ngClass]="{'h-screen bg-indigo-600 text-white transition-width duration-300 flex flex-col': true, 'w-20': isCollapsed, 'w-64': !isCollapsed}">
+      <div class="flex items-center justify-between p-6">
+        <h1 [ngClass]="{'text-3xl font-semibold': true, 'hidden': isCollapsed, 'block': !isCollapsed}">TECVOC</h1>
+      </div>
+      <div class="flex items-center justify-center mt-10">
+        <img
+          src="https://png.pngtree.com/background/20230519/original/pngtree-young-woman-anime-cartoon-drawing-picture-image_2660945.jpg"
+          alt="Profile"
+          class="w-10 h-10 rounded-full"
+        />
+        <span *ngIf="!isCollapsed" class="ml-2">{{ userName }}</span>
+      </div>
+      <nav class="mt-10 flex-grow">
+        <a routerLink="/inicio" class="flex items-center py-2 px-6 text-gray-300 hover:bg-purple-600">
+          <i class="fi fi-home" [ngClass]="{'size-35': isCollapsed, 'size-24': !isCollapsed}"></i>
+          <span *ngIf="!isCollapsed" class="mx-4 font-medium">Inicio</span>
+        </a>
+        <a routerLink="/test" class="flex items-center py-2 px-6 text-gray-300 hover:bg-purple-600">
+          <i class="fi fi-list" [ngClass]="{'size-35': isCollapsed, 'size-24': !isCollapsed}"></i>
+          <span *ngIf="!isCollapsed" class="mx-4 font-medium">Test</span>
+        </a>
+        <a routerLink="/resultados" class="flex items-center py-2 px-6 text-gray-300 hover:bg-purple-600">
+          <i class="fi fi-file-text" [ngClass]="{'size-35': isCollapsed, 'size-24': !isCollapsed}"></i>
+          <span *ngIf="!isCollapsed" class="mx-4 font-medium">Resultados</span>
+        </a>
+        <a routerLink="/videos" class="flex items-center py-2 px-6 text-gray-300 hover:bg-purple-600">
+          <i class="fi fi-video" [ngClass]="{'size-35': isCollapsed, 'size-24': !isCollapsed}"></i>
+          <span *ngIf="!isCollapsed" class="mx-4 font-medium">Videos</span>
+        </a>
+      </nav>
+      <div class="mt-auto mb-4">
+        <button (click)="logout()" class="flex items-center py-2 px-6 text-gray-300 hover:bg-purple-600 w-full">
+          <i class="fi fi-log-out" [ngClass]="{'size-35': isCollapsed, 'size-24': !isCollapsed}"></i>
+          <span *ngIf="!isCollapsed" class="mx-4 font-medium">Cerrar sesión</span>
+        </button>
+      </div>
+    </div>
+  </ng-container>
+  
