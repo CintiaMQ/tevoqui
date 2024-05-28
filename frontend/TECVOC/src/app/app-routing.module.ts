@@ -8,6 +8,7 @@ import { TestComponent } from './pages/alumnos/test/test.component';
 import { VideosComponent } from './pages/alumnos/videos/videos.component';
 import { ResultadosComponent } from './pages/alumnos/resultados/resultados.component';
 import { AuthGuard } from './auth.guard';
+import { CuestionariosComponent } from './pages/admin/cuestionarios/cuestionarios.component';
 
 const routesInicio: Routes = [
   { path: 'login', component: LoginComponent },
@@ -17,7 +18,9 @@ const routesInicio: Routes = [
   { path: 'videos', component: VideosComponent, canActivate: [AuthGuard] },
   { path: 'resultados', component: ResultadosComponent, canActivate: [AuthGuard] },
   { path: '', component: InicioComponent, canActivate: [AuthGuard] },
+  { path: 'cuestionarios', component: CuestionariosComponent },
   { path: '', redirectTo: '', pathMatch: 'full'}
+  
 ];
 
 @NgModule({

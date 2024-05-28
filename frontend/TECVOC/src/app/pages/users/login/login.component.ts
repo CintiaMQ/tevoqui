@@ -22,7 +22,7 @@ export class LoginComponent {
         localStorage.setItem('role', role);
         localStorage.setItem('userName', userName);
         if (role === 'admin') {
-          this.router.navigate(['/admin-dashboard']);
+          this.router.navigate(['/cuestionarios']);
         } else {
           this.router.navigate(['/user-dashboard']);
         }

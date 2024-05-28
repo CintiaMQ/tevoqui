@@ -12,6 +12,7 @@ export class SidebarComponent implements OnInit {
   isSidebarVisible: boolean = true;
   isAuthenticated: boolean;
   userName: string | null = '';
+  userRole: string | null = '';
 
   constructor(private usersService: UsersService) {
     this.isAuthenticated = this.usersService.isAuthenticated();
@@ -19,6 +20,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.userName = localStorage.getItem('userName');
+    this.userRole = localStorage.getItem('role');
   }
 
   logout() {

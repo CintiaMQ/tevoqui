@@ -1,50 +1,53 @@
-
-  
-
-  <!-- user-dashboard -->
-<div class="flex min-h-screen bg-gray-100">
-  <!-- Sidebar -->
-  <app-sidebar></app-sidebar>
+<!-- user-dashboard -->
+<div class="flex flex-col min-h-screen bg-gray-100">
+  <!-- Navbar -->
+  <header class="flex items-center justify-between p-6 bg-indigo-600 text-white shadow-lg">
+    <h1 class="text-2xl font-bold">User Dashboard</h1>
+    <div class="flex items-center space-x-4">
+      <div class="flex items-center">
+        <img
+          src="https://pub-static.fotor.com/assets/projects/pages/d5bdd0513a0740a8a38752dbc32586d0/fotor-03d1a91a0cec4542927f53c87e0599f6.jpg"
+          alt="Profile"
+          class="w-10 h-10 rounded-full"
+        />
+        <span class="ml-2">{{ userName }}</span>
+      </div>
+    </div>
+  </header>
 
   <!-- Main Content -->
-  <div>
-    <!-- Navbar -->
-    <header class="flex items-center justify-between p-6 bg-indigo-600 text-white rounded-lg shadow-lg mb-8">
-      <h1 class="text-2xl font-bold">User Dashboard</h1>
-      <div class="flex items-center space-x-4">
-        <div class="flex items-center">
-          <img
-            src="https://pub-static.fotor.com/assets/projects/pages/d5bdd0513a0740a8a38752dbc32586d0/fotor-03d1a91a0cec4542927f53c87e0599f6.jpg"
-            alt="Profile"
-            class="w-10 h-10 rounded-full"
-          />
-          <span class="ml-2">{{ userName }}</span>
-        </div>
-      </div>
-    </header>
+  <div class="flex flex-grow">
+    <!-- Sidebar -->
+    <app-sidebar></app-sidebar>
 
-  <!-- test.component.html -->
-<main class="bg-white p-6 rounded-lg shadow-inner flex-grow">
-  <section>
-    <div *ngIf="userName">
-      <h1 style="color: black;">Bienvenido, {{ userName }}</h1>
-    </div>
-    <div *ngIf="!userName">
-      <p>Cargando...</p>
-    </div>
-    <div *ngIf="cuestionarios">
-      <div *ngFor="let pregunta of cuestionarios[0].Preguntas; let i = index" [hidden]="i !== currentQuestionIndex">
-        <h2 style="color: black;">{{ pregunta.texto }}</h2>
-        <div *ngFor="let opcion of pregunta.opciones">
-          <button style="color: black;" (click)="selectAnswer(pregunta.id, opcion.valor)">{{ opcion.texto }}</button>
+    <!-- Content -->
+    <main class="bg-white p-6 rounded-lg shadow-inner flex-grow">
+      <section class="flex-grow">
+        <div *ngIf="userName">
+          <h1 class="text-black">Bienvenido, {{ userName }}</h1>
         </div>
-      </div>
-    </div>
-    <div style="color: black;" *ngIf="showResult">
-      <h2 style="color: black;">¡Resultado!</h2>
-      <p style="color: black;">La carrera recomendada para ti es: {{ recommendedCareer }}</p>
-    </div>
-  </section>
-</main>
+        <div *ngIf="!userName">
+          <p>Cargando...</p>
+        </div>
+        <div *ngIf="cuestionarios">
+          <div *ngFor="let pregunta of cuestionarios[0].Preguntas; let i = index" [hidden]="i !== currentQuestionIndex">
+            <h2 class="text-black">{{ pregunta.texto }}</h2>
+            <div *ngFor="let opcion of pregunta.opciones" class="mb-4">
+              <label class="flex items-center space-x-2">
+                <input type="radio" name="question-{{i}}" (click)="selectAnswer(pregunta.id, opcion.valor)" class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
+                <span class="text-black">{{ opcion.texto }}</span>
+              </label>
+            </div>
+          </div>
+          <div class="mt-6">
+            <button (click)="nextQuestion()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-indigo-700">Next Question</button>
+          </div>
+        </div>
+        <div class="text-black" *ngIf="showResult">
+          <h2 class="text-black">¡Resultado!</h2>
+          <p class="text-black">La carrera recomendada para ti es: {{ recommendedCareer }}</p>
+        </div>
+      </section>
+    </main>
   </div>
 </div>

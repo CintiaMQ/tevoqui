@@ -39,7 +39,10 @@ export class CreateUserComponent {
     this.http.post('http://localhost:5000/api/users/register', payload)
       .subscribe((response: any) => {
         console.log('User registered successfully:', response);
-        localStorage.setItem('token', response.token);
+        const { token, role, userName } = response;
+        localStorage.setItem('token', token);
+        localStorage.setItem('role', role);
+        localStorage.setItem('userName', userName);
         this.router.navigate([this.role === 'admin' ? '/user-dashboard' : '/user-dashboard']);
       }, error => {
         console.error('Error registering user:', error);
