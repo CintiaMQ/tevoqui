@@ -1,32 +1,31 @@
 const mongoose = require('mongoose');
 
-const preguntaSchema = new mongoose.Schema({
+const OpcionSchema = new mongoose.Schema({
+  texto: String,
+  valor: String
+});
+
+const PreguntaSchema = new mongoose.Schema({
   id: Number,
   texto: String,
-  opciones: [
-    {
-      texto: String,
-      valor: String,
-    },
-  ],
+  opciones: [OpcionSchema]
 });
 
-const carreraSchema = new mongoose.Schema({
+const CriterioSchema = new mongoose.Schema({
+  pregunta: Number,
+  respuesta: String,
+  puntaje: Number
+});
+
+const CarreraSchema = new mongoose.Schema({
   nombre: String,
-  criterios: [
-    {
-      pregunta: Number,
-      respuesta: String,
-      puntaje: Number,
-    },
-  ],
+  criterios: [CriterioSchema]
 });
 
-const cuestionarioSchema = new mongoose.Schema({
-  Preguntas: [preguntaSchema],
-  Carreras: [carreraSchema],
-}, { collection: 'cuestionario' }); // Especifica el nombre de la colección
+const CuestionarioSchema = new mongoose.Schema({
+  nombre: String,
+  Preguntas: [PreguntaSchema],
+  Carreras: [CarreraSchema]
+});
 
-const Cuestionario = mongoose.model('Cuestionario', cuestionarioSchema);
-
-module.exports = Cuestionario;
+module.exports = mongoose.model('Cuestionario', CuestionarioSchema);

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const TestResult = require('../models/TestResult'); // Modelo de resultados de pruebas (asegúrate de tener este modelo)
+const TestResult = require('../models/TestResult');
 
 // Ruta para obtener todos los resultados de las pruebas
 router.get('/', async (req, res) => {

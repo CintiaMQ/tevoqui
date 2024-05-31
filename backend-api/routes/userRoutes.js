@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken'); // Esta es la línea que importa jwt
 const conectarMongoDB = require('../config/db'); // Importar la función de conexión a MongoDB
-
+cost conectarMongoDB = require('../config/db')
 // Ruta para registrar un usuario
 router.post('/register', async (req, res) => {
   const { email, password, role, name, surname, age, educationLevel, acceptTerms } = req.body;
